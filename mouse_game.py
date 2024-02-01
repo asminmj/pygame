@@ -40,18 +40,16 @@ while running:
 
 
     #use the mouse!
-    '''if event.type == pygame.MOUSEBUTTONDOWN:
+    if event.type == pygame.MOUSEBUTTONDOWN:
         pos = pygame.mouse.get_pos()
         #print(pos)
         #move the circle
         player_pos.x = pos[0]
-        player_pos.y = pos[1] '''
-    
-    '''  if event.type == pygame.MOUSEBUTTONUP:
-        pos = pygame.mouse.get_pos()
-        print(pos)   '''
+        player_pos.y = pos[1]
 
-   
+    if event.type == pygame.MOUSEBUTTONUP:
+        pos = pygame.mouse.get_pos()
+        print(pos)
 
     #flip the display to output our screen 
     pygame.display.flip()
