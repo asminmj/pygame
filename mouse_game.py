@@ -1,71 +1,83 @@
-import pygame 
+import pygame
 
-#pygame setup stuff
+# Pygame Setup Stuff
 pygame.init()
-screen = pygame.display.set_mode((800, 500))
-pygame.display.set_caption('move the balls')
+screen = pygame.display.set_mode((800,500))
+pygame.display.set_caption('Ready to kill')
 clock = pygame.time.Clock()
-running = True 
+running = True
 
-dt = 0 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2,)
+
+dt = 0
+player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 
 while running:
-    #pool for events 
-    #pygame.quit() event closed
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+	# poll for events
+	# pygame.QUIT event means that the user clicked the X to close the window
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			running = False
 
-    #pick the screen color 
-    screen.fill("silver")
+	# Pick the screen color
+	screen.fill("silver")
 
-    #render our game here
-    pygame.draw.circle(screen, "#033660", player_pos, 40)
+	# RENDER OUR GAME HERE
+	pygame.draw.circle(screen, "#033660", player_pos, 40)
 
-    #move our circle 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_UP]:
-        player_pos.y -= 300 * dt 
+	# Move our circle
+	keys = pygame.key.get_pressed()
+	if keys[pygame.K_UP]:
+		player_pos.y -= 300 * dt
+	if keys[pygame.K_DOWN]:
+		player_pos.y += 300 * dt
 
-    if keys[pygame.K_DOWN]:
-        player_pos.y += 300 * dt 
-
-    if keys[pygame.K_LEFT]:
-        player_pos.x -= 300 * dt 
-
-    if keys[pygame.K_RIGHT]:
-        player_pos.x += 300 * dt 
-
-
-    #use the mouse!
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        pos = pygame.mouse.get_pos()
-        #print(pos)
-        #move the circle
-        player_pos.x = pos[0]
-        player_pos.y = pos[1]
-
-    if event.type == pygame.MOUSEBUTTONUP:
-        pos = pygame.mouse.get_pos()
-        print(pos)
-
-    #flip the display to output our screen 
-    pygame.display.flip()
-
-    
-
-    #set the clock stuff / delta time in seconds since the last frame
-    # used for framerate independent physics
-    dt = clock.tick(60) / 1000
-        
+	if keys[pygame.K_LEFT]:
+		player_pos.x -= 300 * dt
+	if keys[pygame.K_RIGHT]:
+		player_pos.x += 300 * dt
+	
+	# Check to see if mouse has been pressed
+		#0 = left click, 2 = right click, 1 = mouse scroll button
+	if pygame.mouse.get_pressed()[0] == True:
+		#print(pygame.mouse.get_pressed())
+		# Move the circle
+		if event.type == pygame.MOUSEMOTION:
+			pos = pygame.mouse.get_pos()
+			player_pos.x = pos[0]
+			player_pos.y = pos[1]
 
 
 
+	'''	
+	# Use the mouse!!
+	if event.type == pygame.MOUSEBUTTONDOWN:
+		#print(event)
+		pos = pygame.mouse.get_pos()
+		# Move the circle
+		player_pos.x = pos[0]
+		player_pos.y = pos[1]
+
+	if event.type == pygame.MOUSEBUTTONUP:
+		pos = pygame.mouse.get_pos()
+		pygame.draw.circle(screen, "red", player_pos, 40)
+	
+	# MOTION!
+	#if event.type == pygame.MOUSEMOTION:
+	#	pos = pygame.mouse.get_pos()
+		# Move the circle
+	#	player_pos.x = pos[0]
+	#	player_pos.y = pos[1]
+	'''
 
 
+	# flip the display to output our work to the screen
+	pygame.display.flip()
 
+
+	# Set the clock stuff / delta time in seconds since the last frame
+	# used for framerate independent physics
+	dt = clock.tick(60) / 1000
 
 
 
